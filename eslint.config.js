@@ -7,7 +7,6 @@ import jsxA11y from "eslint-plugin-jsx-a11y";
 import eslintConfigPrettier from "eslint-config-prettier";
 import checkFile from "eslint-plugin-check-file";
 import pluginQuery from "@tanstack/eslint-plugin-query";
-import pluginRouter from "@tanstack/eslint-plugin-router";
 
 export default tseslint.config(
   { ignores: ["dist"] },
@@ -15,7 +14,6 @@ export default tseslint.config(
     extends: [
       js.configs.recommended,
       pluginQuery.configs["flat/recommended"],
-      pluginRouter.configs["flat/recommended"],
       ...tseslint.configs.recommended,
       jsxA11y.flatConfigs.recommended,
     ],
@@ -47,14 +45,14 @@ export default tseslint.config(
       semi: "error",
 
       /** File/folder naming rules
-       * React TSX files -> PascalCase (except for main/index and anything in src/routes)
+       * React TSX files -> PascalCase (except for main/index)
        * JS/TS files -> camelCase
        * folders -> camelCase
        */
       "check-file/filename-naming-convention": [
         "error",
         {
-          "src/!(routes)/**/!(main|index).{jsx,tsx}": "PASCAL_CASE",
+          "src/**/!(main|index).{jsx,tsx}": "PASCAL_CASE",
           "**/*.{js,ts}": "CAMEL_CASE",
         },
       ],
