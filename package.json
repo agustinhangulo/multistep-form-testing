@@ -1,0 +1,53 @@
+{
+  "name": "react-template",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint . --fix",
+    "preview": "vite preview",
+    "prepare": "husky",
+    "format": "pnpm prettier . --write --ignore-unknown"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.10",
+    "@tanstack/react-query": "^5.76.2",
+    "@tanstack/react-router": "^1.121.12",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.10"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.0",
+    "@tanstack/eslint-plugin-query": "^5.78.0",
+    "@tanstack/eslint-plugin-router": "^1.120.17",
+    "@tanstack/router-plugin": "^1.121.13",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "eslint": "^9.25.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-check-file": "^3.2.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.0.0",
+    "prettier": "^3.5.3",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.30.1",
+    "vite": "^6.3.5"
+  },
+  "lint-staged": {
+    "*.+(js|jsx|ts|tsx)": [
+      "pnpm lint",
+      "pnpm prettier . --write --ignore-unknown"
+    ]
+  }
+}
