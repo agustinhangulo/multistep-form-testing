@@ -1,16 +1,16 @@
 import type { ComponentProps } from "react";
-import { Input as ShadcnInput } from "../ui/Input";
-import { useFieldContext } from "@/lib/formContext";
+import { Textarea as ShadcnTextarea } from "../ui/Textarea";
 import { Field, type FieldPassedProps } from "./Field";
+import { useFieldContext } from "@/lib/formContext";
 
-type InputProps = ComponentProps<typeof ShadcnInput> & FieldPassedProps;
+type TextareaProps = ComponentProps<typeof ShadcnTextarea> & FieldPassedProps;
 
-export const Input = ({ label, description, ...props }: InputProps) => {
+export const Textarea = ({ label, description, ...props }: TextareaProps) => {
   const field = useFieldContext<string>();
 
   return (
-    <Field label={label} description={description} htmlFor={field.name}>
-      <ShadcnInput
+    <Field label={label} description={description}>
+      <ShadcnTextarea
         name={field.name}
         id={field.name}
         value={field.state.value}
