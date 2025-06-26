@@ -1,12 +1,11 @@
 import { FormLayout } from "./FormLayout";
 import { useAppForm } from "@/lib/formContext";
-import { formOptions } from "@tanstack/react-form";
 import z from "zod";
 import { formBuilderSchema } from "../api/schema";
-import { Button } from "@/components/ui/Button";
+import { Button, buttonVariants } from "@/components/ui/Button";
 import { MoveRight } from "lucide-react";
 import { SelectItem } from "@/components/ui/Select";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useFormBuilderStore } from "../stores/store";
 import { useEffect } from "react";
 
@@ -15,23 +14,21 @@ const dataSourceSchema = formBuilderSchema.pick({
   targetTable: true,
 });
 
-const defaultDataSource: z.infer<typeof dataSourceSchema> = {
-  airtableBase: "",
-  targetTable: "",
-};
-
-const formOpts = formOptions({
-  defaultValues: defaultDataSource,
-});
-
 export const DataSourceForm = () => {
   const setData = useFormBuilderStore((state) => state.setData);
   const formName = useFormBuilderStore((state) => state.formName);
   const formDescription = useFormBuilderStore((state) => state.formDescription);
+  const airtableBase = useFormBuilderStore((state) => state.airtableBase);
+  const targetTable = useFormBuilderStore((state) => state.targetTable);
   const navigate = useNavigate();
 
+  const defaultValues: z.infer<typeof dataSourceSchema> = {
+    airtableBase: airtableBase || "",
+    targetTable: targetTable || "",
+  };
+
   const form = useAppForm({
-    ...formOpts,
+    defaultValues: defaultValues,
     onSubmit: ({ value }) => {
       console.log(value);
       setData(value);
@@ -77,7 +74,12 @@ export const DataSourceForm = () => {
       />
 
       <div className="flex gap-2">
-        <Button variant="outline">Back</Button>
+        <Link
+          to="/form-builder/purpose"
+          className={buttonVariants({ variant: "outline" })}
+        >
+          Back
+        </Link>
         <Button type="submit">
           Next <MoveRight />
         </Button>

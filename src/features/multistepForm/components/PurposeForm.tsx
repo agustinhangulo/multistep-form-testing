@@ -1,6 +1,5 @@
 import { FormLayout } from "./FormLayout";
 import { useAppForm } from "@/lib/formContext";
-import { formOptions } from "@tanstack/react-form";
 import z from "zod";
 import { formBuilderSchema } from "../api/schema";
 import { Button } from "@/components/ui/Button";
@@ -13,20 +12,19 @@ const purposeSchema = formBuilderSchema.pick({
   formDescription: true,
 });
 
-const defaultPurpose: z.infer<typeof purposeSchema> = {
-  formName: "",
-  formDescription: "",
-};
-
-const formOpts = formOptions({
-  defaultValues: defaultPurpose,
-});
-
 export const PurposeForm = () => {
   const setData = useFormBuilderStore((state) => state.setData);
+  const formName = useFormBuilderStore((state) => state.formName);
+  const formDescription = useFormBuilderStore((state) => state.formDescription);
   const navigate = useNavigate();
+
+  const defaultValues: z.infer<typeof purposeSchema> = {
+    formName: formName || "",
+    formDescription: formDescription || "",
+  };
+
   const form = useAppForm({
-    ...formOpts,
+    defaultValues: defaultValues,
     onSubmit: ({ value }) => {
       console.log(value);
       setData(value);
@@ -55,7 +53,6 @@ export const PurposeForm = () => {
       />
 
       <div className="flex gap-2">
-        <Button variant="outline">Back</Button>
         <Button type="submit">
           Next <MoveRight />
         </Button>

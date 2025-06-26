@@ -1,26 +1,17 @@
 import { FormLayout } from "./FormLayout";
 import { useAppForm } from "@/lib/formContext";
-import { formOptions } from "@tanstack/react-form";
 import z, { type ZodIssue } from "zod";
 import { formBuilderSchema } from "../api/schema";
-import { Button } from "@/components/ui/Button";
+import { Button, buttonVariants } from "@/components/ui/Button";
 import { MoveRight } from "lucide-react";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { FieldError } from "@/components/form/Field";
 import { useFormBuilderStore } from "../stores/store";
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const fieldSelectionSchema = formBuilderSchema.pick({
   fieldSelection: true,
-});
-
-const defaultFieldSelection: z.infer<typeof fieldSelectionSchema> = {
-  fieldSelection: [],
-};
-
-const formOpts = formOptions({
-  defaultValues: defaultFieldSelection,
 });
 
 const options = [
@@ -35,10 +26,15 @@ export const FieldSelectionForm = () => {
   const formDescription = useFormBuilderStore((state) => state.formDescription);
   const airtableBase = useFormBuilderStore((state) => state.airtableBase);
   const targetTable = useFormBuilderStore((state) => state.targetTable);
+  const fieldSelection = useFormBuilderStore((state) => state.fieldSelection);
   const navigate = useNavigate();
 
+  const defaultValues: z.infer<typeof fieldSelectionSchema> = {
+    fieldSelection: fieldSelection || [],
+  };
+
   const form = useAppForm({
-    ...formOpts,
+    defaultValues: defaultValues,
     onSubmit: ({ value }) => {
       console.log(value);
       setData(value);
@@ -98,7 +94,12 @@ export const FieldSelectionForm = () => {
       />
 
       <div className="flex gap-2">
-        <Button variant="outline">Back</Button>
+        <Link
+          to="/form-builder/data-source"
+          className={buttonVariants({ variant: "outline" })}
+        >
+          Back
+        </Link>
         <Button type="submit">
           Next <MoveRight />
         </Button>
