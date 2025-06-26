@@ -6,6 +6,8 @@ import { formBuilderSchema } from "../api/schema";
 import { Button } from "@/components/ui/Button";
 import { MoveRight } from "lucide-react";
 import { SelectItem } from "@/components/ui/Select";
+import { useNavigate } from "react-router";
+import { useFormBuilderStore } from "../stores/store";
 
 const dataSourceSchema = formBuilderSchema.pick({
   airtableBase: true,
@@ -22,10 +24,15 @@ const formOpts = formOptions({
 });
 
 export const DataSourceForm = () => {
+  const setData = useFormBuilderStore((state) => state.setData);
+
+  const navigate = useNavigate();
   const form = useAppForm({
     ...formOpts,
     onSubmit: ({ value }) => {
       console.log(value);
+      setData(value);
+      navigate("/form-builder/field-selection");
     },
     validators: {
       onSubmit: dataSourceSchema,

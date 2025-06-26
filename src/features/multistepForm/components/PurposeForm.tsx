@@ -5,6 +5,8 @@ import z from "zod";
 import { formBuilderSchema } from "../api/schema";
 import { Button } from "@/components/ui/Button";
 import { MoveRight } from "lucide-react";
+import { useNavigate } from "react-router";
+import { useFormBuilderStore } from "../stores/store";
 
 const purposeSchema = formBuilderSchema.pick({
   formName: true,
@@ -21,10 +23,14 @@ const formOpts = formOptions({
 });
 
 export const PurposeForm = () => {
+  const setData = useFormBuilderStore((state) => state.setData);
+  const navigate = useNavigate();
   const form = useAppForm({
     ...formOpts,
     onSubmit: ({ value }) => {
       console.log(value);
+      setData(value);
+      navigate("/form-builder/data-source");
     },
     validators: {
       onSubmit: purposeSchema,
@@ -43,7 +49,9 @@ export const PurposeForm = () => {
       />
       <form.AppField
         name="formDescription"
-        children={(field) => <field.Textarea label="Form description" />}
+        children={(field) => (
+          <field.Textarea label="Form description" required />
+        )}
       />
 
       <div className="flex gap-2">

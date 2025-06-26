@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { MoveRight } from "lucide-react";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { FieldError } from "@/components/form/Field";
+import { useFormBuilderStore } from "../stores/store";
 
 const fieldSelectionSchema = formBuilderSchema.pick({
   fieldSelection: true,
@@ -27,10 +28,14 @@ const options = [
 ];
 
 export const FieldSelectionForm = () => {
+  const setData = useFormBuilderStore((state) => state.setData);
+
   const form = useAppForm({
     ...formOpts,
     onSubmit: ({ value }) => {
       console.log(value);
+      setData(value);
+      console.log(useFormBuilderStore.getState());
     },
     validators: {
       onSubmit: fieldSelectionSchema,
