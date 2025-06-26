@@ -8,6 +8,8 @@ import { MoveRight } from "lucide-react";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { FieldError } from "@/components/form/Field";
 import { useFormBuilderStore } from "../stores/store";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const fieldSelectionSchema = formBuilderSchema.pick({
   fieldSelection: true,
@@ -22,13 +24,18 @@ const formOpts = formOptions({
 });
 
 const options = [
-  { id: "123", name: "field1" },
-  { id: "456", name: "field2" },
-  { id: "789", name: "field3" },
+  { id: "123", name: "Record ID" },
+  { id: "456", name: "Name" },
+  { id: "789", name: "Grade" },
 ];
 
 export const FieldSelectionForm = () => {
   const setData = useFormBuilderStore((state) => state.setData);
+  const formName = useFormBuilderStore((state) => state.formName);
+  const formDescription = useFormBuilderStore((state) => state.formDescription);
+  const airtableBase = useFormBuilderStore((state) => state.airtableBase);
+  const targetTable = useFormBuilderStore((state) => state.targetTable);
+  const navigate = useNavigate();
 
   const form = useAppForm({
     ...formOpts,
@@ -41,6 +48,18 @@ export const FieldSelectionForm = () => {
       onSubmit: fieldSelectionSchema,
     },
   });
+
+  useEffect(() => {
+    if (
+      formName === undefined ||
+      formDescription === undefined ||
+      airtableBase === undefined ||
+      targetTable === undefined
+    ) {
+      // Might be helpful to display something as we renavigate
+      navigate("/form-builder/purpose");
+    }
+  }, [formName, formDescription, airtableBase, targetTable, navigate]);
 
   return (
     <FormLayout
@@ -68,7 +87,7 @@ export const FieldSelectionForm = () => {
                     }
                   }}
                 />
-                <p>{option.name}</p>
+                <p className="text-sm">{option.name}</p>
               </div>
             ))}
             <FieldError

@@ -8,6 +8,7 @@ import { MoveRight } from "lucide-react";
 import { SelectItem } from "@/components/ui/Select";
 import { useNavigate } from "react-router";
 import { useFormBuilderStore } from "../stores/store";
+import { useEffect } from "react";
 
 const dataSourceSchema = formBuilderSchema.pick({
   airtableBase: true,
@@ -25,8 +26,10 @@ const formOpts = formOptions({
 
 export const DataSourceForm = () => {
   const setData = useFormBuilderStore((state) => state.setData);
-
+  const formName = useFormBuilderStore((state) => state.formName);
+  const formDescription = useFormBuilderStore((state) => state.formDescription);
   const navigate = useNavigate();
+
   const form = useAppForm({
     ...formOpts,
     onSubmit: ({ value }) => {
@@ -38,6 +41,13 @@ export const DataSourceForm = () => {
       onSubmit: dataSourceSchema,
     },
   });
+
+  useEffect(() => {
+    if (formName === undefined || formDescription === undefined) {
+      // Might be helpful to display something as we renavigate
+      navigate("/form-builder/purpose");
+    }
+  }, [formName, formDescription, navigate]);
 
   return (
     <FormLayout
