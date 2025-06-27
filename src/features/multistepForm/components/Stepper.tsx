@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import type { ComponentProps } from "react";
 import { Info, Database, SquareCheck } from "lucide-react";
 import { Link, useLocation } from "react-router";
-import { useFormBuilderStore } from "../stores/store";
+import { useFormBuilderStore } from "../stores/Store";
 
 type StepperLinkProps = ComponentProps<typeof Link> & {
   disabled?: boolean;

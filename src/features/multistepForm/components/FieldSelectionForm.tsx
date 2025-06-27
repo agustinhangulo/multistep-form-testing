@@ -6,7 +6,7 @@ import { Button, buttonVariants } from "@/components/ui/Button";
 import { MoveRight } from "lucide-react";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { FieldError } from "@/components/form/Field";
-import { useFormBuilderStore } from "../stores/store";
+import { useFormBuilderStore, useFormBuilderStoreApi } from "../stores/Store";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router";
 
@@ -22,6 +22,7 @@ const options = [
 
 export const FieldSelectionForm = () => {
   const setData = useFormBuilderStore((state) => state.setData);
+  const store = useFormBuilderStoreApi();
   const formName = useFormBuilderStore((state) => state.formName);
   const formDescription = useFormBuilderStore((state) => state.formDescription);
   const airtableBase = useFormBuilderStore((state) => state.airtableBase);
@@ -38,7 +39,7 @@ export const FieldSelectionForm = () => {
     onSubmit: ({ value }) => {
       console.log(value);
       setData(value);
-      console.log(useFormBuilderStore.getState());
+      console.log(store.getState());
     },
     validators: {
       onSubmit: fieldSelectionSchema,

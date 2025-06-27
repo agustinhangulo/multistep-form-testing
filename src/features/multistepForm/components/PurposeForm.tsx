@@ -5,7 +5,7 @@ import { formBuilderSchema } from "../api/schema";
 import { Button } from "@/components/ui/Button";
 import { MoveRight } from "lucide-react";
 import { useNavigate } from "react-router";
-import { useFormBuilderStore } from "../stores/store";
+import { useFormBuilderStore } from "../stores/Store";
 
 const purposeSchema = formBuilderSchema.pick({
   formName: true,

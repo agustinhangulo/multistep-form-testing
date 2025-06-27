@@ -6,7 +6,7 @@ import { Button, buttonVariants } from "@/components/ui/Button";
 import { MoveRight } from "lucide-react";
 import { SelectItem } from "@/components/ui/Select";
 import { Link, useNavigate } from "react-router";
-import { useFormBuilderStore } from "../stores/store";
+import { useFormBuilderStore } from "../stores/Store";
 import { useEffect } from "react";
 
 const dataSourceSchema = formBuilderSchema.pick({
