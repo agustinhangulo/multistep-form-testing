@@ -2,20 +2,27 @@ import { DataSourceForm } from "@/features/multistepForm/components/DataSourceFo
 import { FieldSelectionForm } from "@/features/multistepForm/components/FieldSelectionForm";
 import { PurposeForm } from "@/features/multistepForm/components/PurposeForm";
 import { FormBuilder } from "@/routes/FormBuilder";
+import { Home } from "@/routes/Home";
 import { Root } from "@/routes/Root";
 import { createBrowserRouter, RouterProvider } from "react-router";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Root /> },
   {
-    path: "/form-builder",
-    element: <FormBuilder />,
+    path: "/",
+    element: <Root />,
     children: [
-      { path: "/form-builder/purpose", element: <PurposeForm /> },
-      { path: "/form-builder/data-source", element: <DataSourceForm /> },
+      { path: "/", element: <Home /> },
       {
-        path: "/form-builder/field-selection",
-        element: <FieldSelectionForm />,
+        path: "/form-builder",
+        element: <FormBuilder />,
+        children: [
+          { path: "/form-builder/purpose", element: <PurposeForm /> },
+          { path: "/form-builder/data-source", element: <DataSourceForm /> },
+          {
+            path: "/form-builder/field-selection",
+            element: <FieldSelectionForm />,
+          },
+        ],
       },
     ],
   },

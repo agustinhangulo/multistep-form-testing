@@ -54,7 +54,7 @@ export const PurposeForm = () => {
 
       <div className="flex gap-2">
         <Button type="submit">
-          Next <MoveRight />
+          Submit and Continue <MoveRight />
         </Button>
       </div>
     </FormLayout>

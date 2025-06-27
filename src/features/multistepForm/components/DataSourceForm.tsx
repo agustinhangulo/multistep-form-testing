@@ -81,7 +81,7 @@ export const DataSourceForm = () => {
           Back
         </Link>
         <Button type="submit">
-          Next <MoveRight />
+          Submit and Continue <MoveRight />
         </Button>
       </div>
     </FormLayout>

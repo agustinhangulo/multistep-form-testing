@@ -101,7 +101,7 @@ export const FieldSelectionForm = () => {
           Back
         </Link>
         <Button type="submit">
-          Next <MoveRight />
+          Submit Form <MoveRight />
         </Button>
       </div>
     </FormLayout>
