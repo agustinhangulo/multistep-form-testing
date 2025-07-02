@@ -19,6 +19,7 @@ export const Header = () => {
     <div className="mx-2 py-4 border-b-2 border-stone-800">
       <HeaderLink to="/">Home</HeaderLink>
       <HeaderLink to="/form-builder/purpose">Form Creation</HeaderLink>
+      <HeaderLink to="/form-builder/rhf/purpose">Form Creation RHF</HeaderLink>
     </div>
   );
 };
