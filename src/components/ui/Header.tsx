@@ -20,6 +20,7 @@ export const Header = () => {
       <HeaderLink to="/">Home</HeaderLink>
       <HeaderLink to="/form-builder/purpose">Form Creation</HeaderLink>
       <HeaderLink to="/form-builder/rhf/purpose">Form Creation RHF</HeaderLink>
+      <HeaderLink to="/form-builder/v2/purpose">Form Creation v2</HeaderLink>
     </div>
   );
 };
