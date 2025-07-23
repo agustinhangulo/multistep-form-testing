@@ -1,7 +1,5 @@
-import { Field } from "@/components/form/Field";
-import { Input } from "@/components/form/Input";
-import { Select } from "@/components/form/Select";
-import { Textarea } from "@/components/form/Textarea";
+import { Input } from "@/components/formv2/Input";
+import { Textarea } from "@/components/formv2/Textarea";
 import {
   FieldDescription,
   FieldErrors,
@@ -17,10 +15,8 @@ export const { useAppForm } = createFormHook({
   formContext,
   // We'll learn more about these options later
   fieldComponents: {
-    Field,
     Input,
     Textarea,
-    Select,
     FieldLabel,
     FieldDescription,
     FieldErrors,

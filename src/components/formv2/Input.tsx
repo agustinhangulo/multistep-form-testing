@@ -3,7 +3,7 @@ import { Input as ShadcnInput } from "../ui/Input";
 import { useFieldContext } from "@/lib/formContext";
 
 export const Input = ({ ...props }: ComponentProps<typeof ShadcnInput>) => {
-  const field = useFieldContext();
+  const field = useFieldContext<string>();
 
   return (
     <ShadcnInput
